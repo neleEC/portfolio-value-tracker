@@ -1,0 +1,51 @@
+name: Run Python Script Daily
+
+permissions:
+  contents: write   # REQUIRED for pushing with GITHUB_TOKEN
+
+
+# Comment the block below if you want to trigger the workflow manually
+on:
+  workflow_dispatch:
+
+# Uncomment the block below to automate daily runs
+# on:
+#   schedule:
+#     - cron: "00 15 * * 1-5"  # Runs Mon–Fri at 15:00 UTC (16:00 Europe/Paris winter time), this can easily adapted
+
+#### Do NOT modify below this line
+
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Chromium & ChromeDriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser chromium-chromedriver
+
+      - name: Install dependencies
+        run: pip install pandas openpyxl selenium bs4 requests numpy lxml python-dateutil tqdm
+
+      - name: Run script
+        run: python main.py
+
+      - name: Commit pickle output
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          if [ -f time_series.pkl ]; then
+            git add time_series.pkl
+            git diff --cached --quiet || git commit -m "Update time_series.pkl"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          fi
