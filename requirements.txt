@@ -1,0 +1,26 @@
+txt
+# requirements.txt
+# Python Web Scraping & Data Processing
+# Generated for automated daily scraping project
+
+# Core Data Processing
+pandas==2.1.4
+numpy==1.24.0
+
+# Web Scraping & HTML Parsing
+beautifulsoup4==4.12.2
+requests==2.31.0
+lxml==4.9.3
+
+# Browser Automation (Selenium)
+selenium==4.15.0
+
+# Selenium Drivers (choose based on your browser)
+# Chrome Driver - will be installed automatically by webdriver-manager
+
+# Utilities
+python-dateutil==2.8.2
+
+# Optional but useful
+tqdm==4.66.1  # Progress bars for loops
+openpyxl==3.1.2  # Excel support if needed
