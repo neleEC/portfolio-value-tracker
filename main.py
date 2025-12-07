@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Dec  5 16:58:58 2025
-
-@author: emanuele.chini
-"""
-
-# -*- coding: utf-8 -*-
-"""
 Created on Thu Jun  5 14:45:20 2025
 @author: emanuele.chini
 definition of the class ptf (portafolio of ETFs)
@@ -187,7 +180,7 @@ class ptfs:                  # define class ptf (= portfolio of ETFs and portfol
                     'date': date,
                     #'daily_change_abs': daily_change_abs,
                     #'daily_change_pct': daily_change_pct,
-                    'spread': spread,
+                    #'spread': spread,
                     #'low_52w': low_52w,
                     #'high_52w': high_52w
                 })
@@ -199,7 +192,7 @@ class ptfs:                  # define class ptf (= portfolio of ETFs and portfol
                     'date':  np.nan,
                     #'daily_change_abs': np.nan,
                     #'daily_change_pct': np.nan,
-                    'spread': np.nan,
+                    #'spread': np.nan,
                     #'low_52w': np.nan,
                     #'high_52w': np.nan
                 })
@@ -214,25 +207,30 @@ class ptfs:                  # define class ptf (= portfolio of ETFs and portfol
 
 # Main execution when script runs directly
 def main():
-    ptf = pd.read_excel('portfolio.xlsx')
-    My_ptf_ETF = ptf[ptf.TYPE.isin(["ETF"])][["ISIN", "q"]].groupby("ISIN").sum().to_dict()['q']
-    My_ptf_EQUITY = ptf[ptf.TYPE.isin(["EQUITY"])][["ISIN", "q"]].groupby("ISIN").sum().to_dict()['q']
-    ptf_ETF_EQ = ptf[ptf.TYPE.isin(["ETF","EQUITY"])][["ISIN", "q",'PMC']]
+# We record the price and quantity for each holding in the portfolio.
+# This allows tracking changes in the quantity of any security over time
+# (via updates to portfolio.xlsx), and prevents artificial jumps in total value
+# when new assets are added.
+# The output is a time-series of each holding’s quantity and price. 
+    ptf        = pd.read_excel('portfolio.xlsx') # upload the ptf 
+    ptf_ETF    = ptf[ptf.TYPE.isin(["ETF"   ])][["ISIN", "q"]].groupby("ISIN").sum().to_dict()['q']        # take the ETF
+    ptf_EQUITY = ptf[ptf.TYPE.isin(["EQUITY"])][["ISIN", "q"]].groupby("ISIN").sum().to_dict()['q']        # take the equity
+    ptf_ETF_EQ = ptf[ptf.TYPE.isin(["ETF","EQUITY"])][["ISIN", "q"]]
     My_ptf = {'EQUITY': My_ptf_EQUITY,
-               'ETF': My_ptf_ETF
+               'ETF':   My_ptf_ETF
               }
-    A = ptfs(My_ptf).ns_info__EQ_ET()
-    ptf_ETF_EQ['price'] = ptf_ETF_EQ['ISIN'].map(dict(A[['ISIN','price']].values))
-    ptf_ETF_EQ['$VALUE'] = ptf_ETF_EQ.q*(ptf_ETF_EQ.price)
-    data = ptf_ETF_EQ[['ISIN','q','price']]
+    ptf_info = ptfs(My_ptf).ns_info__EQ_ET()                                                               # retrieve the equinfo
+    ptf_ETF_EQ['price'] = ptf_ETF_EQ['ISIN'].map(dict(ptf_info[['ISIN','price']].values))
+    #ptf_ETF_EQ['$VALUE'] = ptf_ETF_EQ.q*(ptf_ETF_EQ.price)
+    data = ptf_ETF_EQ[['ISIN','q','price']]                                                               # take the prices and quantities 
     data['t'] = datetime.datetime.now().strftime("%I:%M %p %m/%d/%Y")
+    # upload the TS file with the new data
     try:
         with open('time_series.pkl', 'rb') as f:
             data_old = pickle.load(f)
         data = pd.concat([data_old,data])
         with open('time_series.pkl', 'wb') as f:
             pickle.dump(data, f)
-        
     except:
         with open('time_series.pkl', 'wb') as f:
             pickle.dump(data, f)
@@ -242,6 +240,7 @@ def main():
 if __name__ == '__main__':
     main()  # Just run it
     # Script exits with code 0 automatically when don
+
 
 
 
