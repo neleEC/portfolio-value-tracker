@@ -29,11 +29,11 @@ The Excel file must contain the following columns:
 
 ---
 
-## What the Script Does
+## What the Script Does at the scheduled time
 
 1. Reads `portfolio.xlsx`  
-2. Scrapes current prices for ETFs and equities from justETF.com  (this can be edited to srape additional information) 
-3. Retains the 'quantity' held (from portfolio.xlsx) and the current price (webscraping justEtf) of each position 
+2. Scrapes current prices for ETFs and equities from justETF.com  (this can be edited to scrape additional information) 
+3. Retains the 'quantity' held (from portfolio.xlsx), and the current price (webscrapped from justEtf) of each position 
 4. Updates `time_series.pkl` with new prices and quantities
 5. Automatically commits the updated file back to the repository
 
