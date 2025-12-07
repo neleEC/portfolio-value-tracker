@@ -1,6 +1,6 @@
 # Portfolio Value Tracker
 
-A GitHub Actions–powered bot that automatically scrapes market data, computes the value of your portfolio, and commits updated time-series data to the repository.
+A GitHub Actions–powered bot that automatically scrapes market data and commits updated time-series data to the repository.
 
 ---
 
