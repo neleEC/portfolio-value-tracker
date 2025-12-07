@@ -33,8 +33,8 @@ The Excel file must contain the following columns:
 
 1. Reads `portfolio.xlsx`  
 2. Scrapes current prices for ETFs and equities from justETF.com  (this can be edited to srape additional information) 
-3. Takes the 'quantity' held and the current price of each position
-4. Updates `time_series.pkl` with new prices and quantities  
+3. Retains the 'quantity' held (from portfolio.xlsx) and the current price (webscraping justEtf) of each position 
+4. Updates `time_series.pkl` with new prices and quantities
 5. Automatically commits the updated file back to the repository
 
 ---
@@ -48,7 +48,7 @@ The Excel file must contain the following columns:
 ## Notes
 
 - Ensure `portfolio.xlsx` is up-to-date; any changes to quantities will be reflected in the next run.
-- Ensure to set up the time of execution of the code `.github/workflows/automatic_run.yml`, at the moment it is set on Manual execution with the **workflow_dispatch** trigger.
+- Ensure to set up the time of execution of the code `.github/workflows/automatic_run.yml`, at the moment it is set on manual execution with the **workflow_dispatch** trigger.
 
 
 
