@@ -215,15 +215,16 @@ def main():
     ptf        = pd.read_excel('portfolio.xlsx') # upload the ptf 
     ptf_ETF    = ptf[ptf.TYPE.isin(["ETF"   ])][["ISIN", "q"]].groupby("ISIN").sum().to_dict()['q']        # take the ETF
     ptf_EQUITY = ptf[ptf.TYPE.isin(["EQUITY"])][["ISIN", "q"]].groupby("ISIN").sum().to_dict()['q']        # take the equity
-    ptf_ETF_EQ = ptf[ptf.TYPE.isin(["ETF","EQUITY"])][["ISIN", "q"]]
-    My_ptf = {'EQUITY': My_ptf_EQUITY,
-               'ETF':   My_ptf_ETF
+    #ptf_ETF_EQ = ptf[ptf.TYPE.isin(["ETF","EQUITY"])][["ISIN", "q"]]
+    My_ptf = {'EQUITY': ptf_EQUITY,
+               'ETF':   ptf_ETF
               }
+    T = datetime.datetime.now().strftime("%I:%M %p %m/%d/%Y")
     ptf_info = ptfs(My_ptf).ns_info__EQ_ET()                                                               # retrieve the equinfo
-    ptf_ETF_EQ['price'] = ptf_ETF_EQ['ISIN'].map(dict(ptf_info[['ISIN','price']].values))
+    ptf['price'] = ptf['ISIN'].map(dict(ptf_info[['ISIN','price']].values))
     #ptf_ETF_EQ['$VALUE'] = ptf_ETF_EQ.q*(ptf_ETF_EQ.price)
-    data = ptf_ETF_EQ[['ISIN','q','price']]                                                               # take the prices and quantities 
-    data['t'] = datetime.datetime.now().strftime("%I:%M %p %m/%d/%Y")
+    data = ptf[['ISIN','q','price']]                                                               # take the prices and quantities 
+    data['t'] = T
     # upload the TS file with the new data
     try:
         with open('time_series.pkl', 'rb') as f:
@@ -240,6 +241,7 @@ def main():
 if __name__ == '__main__':
     main()  # Just run it
     # Script exits with code 0 automatically when don
+
 
 
 
