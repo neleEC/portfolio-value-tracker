@@ -168,7 +168,7 @@ class ptfs:                  # define class ptf (= portfolio of ETFs and portfol
                 #daily_change_abs = float(daily_change_abs.replace('+', '').replace(',', '.'))
                 #daily_change_pct = float(daily_change_pct.replace('+', '').replace('%', '').replace(',', '.'))
                 
-                spread = float(lines[5].replace('%', '').replace(',', '.'))
+                #spread = float(lines[5].replace('%', '').replace(',', '.'))
                 
                 #low_52w = float(lines[7].replace(',', '.'))
                 #high_52w = float(lines[8].replace(',', '.'))
@@ -199,7 +199,7 @@ class ptfs:                  # define class ptf (= portfolio of ETFs and portfol
                     
         
         df = pd.DataFrame(rows)
-        df['n_shares'] = df['ISIN'].map(self.isin_quantity_dict)
+        #df['price_adj_spread'] = df['price']-df['spread']/2
         return(df)
 
 
@@ -241,6 +241,7 @@ def main():
 if __name__ == '__main__':
     main()  # Just run it
     # Script exits with code 0 automatically when don
+
 
 
 
