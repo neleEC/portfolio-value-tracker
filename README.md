@@ -24,12 +24,13 @@ The Excel file must contain the following columns:
 | **TYPE** | `"ETF"` or `"EQUITY"` |
 
 
-- You can set the execution time by editing the `schedule` block in - **.github/workflows/automatic_run.yml**
-- Manual execution is also possible using the **workflow_dispatch** trigger.
-
 ---
 
 ## What the Script Does at the scheduled time
+
+- You can set the execution time by editing the `schedule` block in - **.github/workflows/automatic_run.yml**
+- Manual execution is also possible using the **workflow_dispatch** trigger.
+- When executed the script:
 
 1. Reads `portfolio.xlsx`  
 2. Scrapes current prices for ETFs and equities from justETF.com  (this can be edited to scrape additional information) 
