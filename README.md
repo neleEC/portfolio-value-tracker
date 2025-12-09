@@ -8,7 +8,7 @@ A simple GitHub Actions–powered bot that automatically scrapes market data and
 
 - **portfolio.xlsx** – Input file containing your portfolio holdings.
 - **main.py** – Main Python script that performs scraping and calculations.
-- **time_series.pkl** – Output file storing historical portfolio values (automatically updated).
+- **time_series.pkl** – Output file storing the current portfolio values (automatically updated to keep track of the historical).
 - **.github/workflows/automatic_run.yml** – GitHub Actions workflow file controlling automatic execution.
 
 ---
@@ -18,11 +18,11 @@ A simple GitHub Actions–powered bot that automatically scrapes market data and
 The Excel file must contain the following columns:
 
 | Column | Description |
-|--------|-------------|
-| **ISIN** | The 12-character ISIN code of each security |
-| **q** | Quantity held |
-| **TYPE** | `"ETF"` or `"EQUITY"` |
-
+|----------|------------------------------------------------|
+| **ISIN** |    The 12-character ISIN code of each security |
+| **q**    |    Quantity held                               |
+| **TYPE** | `  "ETF"` or `"EQUITY"`                        |
+|----------|------------------------------------------------|
 
 ---
 
