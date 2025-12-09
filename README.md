@@ -18,11 +18,11 @@ A simple GitHub Actions–powered bot that automatically scrapes market data and
 The Excel file must contain the following columns:
 
 | Column | Description |
-|----------|------------------------------------------------|
+|---|---|
 | **ISIN** |    The 12-character ISIN code of each security |
 | **q**    |    Quantity held                               |
 | **TYPE** | `  "ETF"` or `"EQUITY"`                        |
-|----------|------------------------------------------------|
+|---|---|
 
 ---
 
