@@ -22,7 +22,7 @@ The Excel file must contain the following columns:
 | **ISIN** |    The 12-character ISIN code of each security |
 | **q**    |    Quantity held                               |
 | **TYPE** | `  "ETF"` or `"EQUITY"`                        |
-|---|---|
+
 
 ---
 
