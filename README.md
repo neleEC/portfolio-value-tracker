@@ -40,7 +40,7 @@ The Excel file must contain the following columns:
 
 ---
 
-##Output
+## Output
 
 - **time_series.pkl** – A pandas DataFrame containing historical prices and quantities for all holdings.
 
