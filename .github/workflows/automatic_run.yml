@@ -4,16 +4,25 @@ permissions:
   contents: write   # REQUIRED for pushing with GITHUB_TOKEN
 
 
-# Comment the block below if you want to trigger the workflow manually
+####  Modify below this line
+#############################################################################################
+# Uncomment the block below if you want to trigger the workflow manually, or keep it commented to automate daily runs
+
+###
 on:
   workflow_dispatch:
+###
 
-# Uncomment the block below to automate daily runs
+# Uncomment the block below to automate daily runs, or keep it commented to trigger the workflow manually
+
+###
 # on:
 #   schedule:
 #     - cron: "00 15 * * 1-5"  # Runs Mon–Fri at 15:00 UTC (16:00 Europe/Paris winter time), this can easily adapted
+###
 
 #### Do NOT modify below this line
+#############################################################################################
 
 
 jobs:
