@@ -13,6 +13,8 @@ import time
 import string
 #pip install selenium
 
+
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -104,13 +106,13 @@ class ptfs:                  # define class ptf (= portfolio of ETFs and portfol
 
 
         #options = Options()
-        options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        driver = webdriver.Chrome(
-             service=Service("/usr/lib/chromium-browser/chromedriver"),
-             options=options
-             )
+        #driver = webdriver.Chrome(
+        #     service=Service("/usr/lib/chromium-browser/chromedriver"),
+        #     options=options
+        #      )
+        driver = webdriver.Chrome(options=options)
 
         
         # Navigate to justETF homepage to set cookies
@@ -119,10 +121,10 @@ class ptfs:                  # define class ptf (= portfolio of ETFs and portfol
         
         # allow cookies
         wait = WebDriverWait(driver, 10)
-        allow_all_button = wait.until(EC.element_to_be_clickable(
-            (By.ID, "CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
-        ))
-        allow_all_button.click()
+        #allow_all_button = wait.until(EC.element_to_be_clickable(
+        #    (By.ID, "CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
+        #))
+        #allow_all_button.click()
         
         # open each ETF page and collect info
         results = {}
